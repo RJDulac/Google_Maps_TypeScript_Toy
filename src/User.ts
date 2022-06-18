@@ -1,8 +1,7 @@
 import faker from "faker";
+import { Markable } from "./Markable";
 
-//export default "red";
-
-export class User {
+export class User implements Markable{
     name: string;
     location: {
         lat: number;
@@ -13,6 +12,9 @@ export class User {
         this.location = {
             lat: parseFloat(faker.address.latitude()),
             lng: parseFloat(faker.address.longitude())
-        }
+        };
+    }
+    markerContent(): string {
+        return `<h1 style='color:blue;'>User Name: ${this.name}</h1>`;
     }
 }

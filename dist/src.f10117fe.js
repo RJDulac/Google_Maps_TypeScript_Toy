@@ -136882,8 +136882,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.User = void 0;
 
-var faker_1 = __importDefault(require("faker")); //export default "red";
-
+var faker_1 = __importDefault(require("faker"));
 
 var User =
 /** @class */
@@ -136895,6 +136894,10 @@ function () {
       lng: parseFloat(faker_1.default.address.longitude())
     };
   }
+
+  User.prototype.markerContent = function () {
+    return "<h1 style='color:blue;'>User Name: ".concat(this.name, "</h1>");
+  };
 
   return User;
 }();
@@ -136928,6 +136931,11 @@ function () {
     };
   }
 
+  Company.prototype.markerContent = function () {
+    return "\n        <div style='text-align:center;'>\n        <h1>Company Name: ".concat(this.companyName, "</h1>\n        <h3 style='color:gray;'>Catchphrase: ").concat(this.catchPhrase, "</h3>\n        </div>\n        ");
+  };
+
+  ;
   return Company;
 }();
 
@@ -136954,12 +136962,20 @@ function () {
   }
 
   CustomMap.prototype.addMarker = function (marker) {
-    new google.maps.Marker({
+    var _this = this;
+
+    var mark = new google.maps.Marker({
       map: this.googleMap,
       position: {
         lat: marker.location.lat,
         lng: marker.location.lng
       }
+    });
+    mark.addListener("click", function () {
+      var infoWindow = new google.maps.InfoWindow({
+        content: marker.markerContent()
+      });
+      infoWindow.open(_this.googleMap, mark);
     });
   };
 
@@ -137013,7 +137029,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58786" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54764" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
