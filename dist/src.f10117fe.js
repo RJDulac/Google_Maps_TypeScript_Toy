@@ -117,24 +117,42 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"src/index.ts":[function(require,module,exports) {
-"use strict"; //import red from "./User"; //can be any name. In TS never use default statements. It's not convention
+})({"src/CustomMap.ts":[function(require,module,exports) {
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
-}); //typeScript is stupid, so you need to assign an element this way.
-// let mapID;
-// mapID = document.getElementById("map")
-// const mapElement = mapID;
-//can also tell TypeScript it's an html element
-// const map = new google.maps.Map(document.getElementById("map") as HTMLElement, {
-//     zoom: 1,
-//     center: {
-//         lat: 0,
-//         lng: 0
-//     }
-// });
-},{}],"../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+});
+exports.CustomMap = void 0; //encapsulate google map
+
+var CustomMap =
+/** @class */
+function () {
+  function CustomMap(divId) {
+    this.googleMap = new google.maps.Map(document.getElementById(divId), {
+      zoom: 1,
+      center: {
+        lat: 0,
+        lng: 0
+      }
+    });
+  }
+
+  return CustomMap;
+}();
+
+exports.CustomMap = CustomMap;
+},{}],"src/index.ts":[function(require,module,exports) {
+"use strict"; /// <reference types="@types/google.maps" />
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var CustomMap_1 = require("./CustomMap");
+
+new CustomMap_1.CustomMap("map");
+},{"./CustomMap":"src/CustomMap.ts"}],"../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -162,7 +180,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57082" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58786" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
